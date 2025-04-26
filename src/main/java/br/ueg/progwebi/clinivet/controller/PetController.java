@@ -5,22 +5,13 @@ import br.ueg.progwebi.clinivet.model.Pet;
 import br.ueg.progwebi.clinivet.service.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/pet")
 public class PetController {
     @Autowired
     private PetService petService;
-
-    @PostMapping
-    public ResponseEntity<Pet> create(@RequestBody PetDTO petDTO) {
-         Pet newPet = petDTOToModel(petDTO);
-         return ResponseEntity.ok(petService.create(newPet));
-    }
 
     private static Pet petDTOToModel(PetDTO pet) {
         return Pet.builder()
@@ -32,4 +23,23 @@ public class PetController {
                 .isNeutered(pet.isNeutered())
                 .build();
     }
+
+    @PostMapping
+    public ResponseEntity<Pet> create(@RequestBody PetDTO petDTO) {
+         Pet newPet = petDTOToModel(petDTO);
+         return ResponseEntity.ok(petService.create(newPet));
+    }
+
+    @PutMapping(path = "/{id}")
+    public Pet update(
+            @PathVariable Long id,
+            @RequestBody PetDTO petDTO) {
+        Pet petUpdate = petDTOToModel(petDTO);
+        return petService.update(id, petUpdate);
+    }
+
+
+
+
+
 }
