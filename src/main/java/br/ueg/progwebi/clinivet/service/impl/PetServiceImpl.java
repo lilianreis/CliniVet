@@ -8,6 +8,7 @@ import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -47,6 +48,11 @@ public class PetServiceImpl implements PetService {
         }
     }
 
+    @Override
+    public List<Pet> getAll() {
+        return this.repository.findAll();
+    }
+
     private void createValidator(Pet pet) {
         if(Strings.isEmpty(pet.getName())){
             throw new BusinessException("Name não pode ser nulo ou vazio");
@@ -58,12 +64,14 @@ public class PetServiceImpl implements PetService {
                     .getName());
         }
     }
-        private static void updateValidation(Pet pet){
-            if(Strings.isEmpty(pet.getName()) ||
-                    Objects.isNull(pet.getId()) ||
-                    pet.getId().longValue()==0
-            ){
-                throw new BusinessException("Information incomplete (name or ID)");
-            }
+
+    private static void updateValidation(Pet pet){
+        if(Strings.isEmpty(pet.getName()) ||
+                Objects.isNull(pet.getId()) ||
+                pet.getId().longValue()==0
+        ){
+            throw new BusinessException("Information incomplete (name or ID)");
         }
+    }
+
 }

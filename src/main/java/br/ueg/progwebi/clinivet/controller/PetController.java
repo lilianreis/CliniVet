@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/pet")
 public class PetController {
@@ -21,6 +23,7 @@ public class PetController {
                 .breed(pet.getBreed())
                 .birthDate(pet.getBirthDate())
                 .isNeutered(pet.isNeutered())
+                .gender(pet.getGender())
                 .build();
     }
 
@@ -42,5 +45,11 @@ public class PetController {
     public Pet getById(@PathVariable Long id) {
         return this.petService.getbyId(id);
     }
+
+    @GetMapping
+    public List<Pet> getAll() {
+        return this.petService.getAll();
+    }
+
 
 }

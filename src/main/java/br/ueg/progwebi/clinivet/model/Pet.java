@@ -43,4 +43,6 @@ public class Pet {
     private LocalDate birthDate;
 
     private boolean isNeutered;
+
+    private String gender;
 }

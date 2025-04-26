@@ -12,4 +12,5 @@ public class PetDTO {
     private String species;
     private LocalDate birthDate;
     private boolean isNeutered;
+    private String gender;
 }
