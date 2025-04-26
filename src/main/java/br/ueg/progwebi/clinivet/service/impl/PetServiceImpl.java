@@ -28,6 +28,10 @@ public class PetServiceImpl implements PetService {
         Pet dbPet = this.getbyId(id);
         dbPet.setName(pet.getName());
         dbPet.setTutor(pet.getTutor());
+        dbPet.setBreed(pet.getBreed());
+        dbPet.setSpecies(pet.getSpecies());
+        dbPet.setBirthDate(pet.getBirthDate());
+        dbPet.setNeutered(pet.isNeutered());
 
         return repository.save(dbPet);
     }

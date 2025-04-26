@@ -38,8 +38,9 @@ public class PetController {
         return petService.update(id, petUpdate);
     }
 
-
-
-
+    @GetMapping(path = "/{id}")
+    public Pet getById(@PathVariable Long id) {
+        return this.petService.getbyId(id);
+    }
 
 }
