@@ -10,4 +10,5 @@ public interface PetService {
     Pet update(Long id, Pet pet);
     Pet getbyId(Long id);
     List<Pet> getAll();
+    Pet delete(Long id);
 }

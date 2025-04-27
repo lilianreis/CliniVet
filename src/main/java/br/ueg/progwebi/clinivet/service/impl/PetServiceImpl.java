@@ -27,6 +27,7 @@ public class PetServiceImpl implements PetService {
     @Override
     public Pet update(Long id, Pet pet) {
         Pet dbPet = this.getbyId(id);
+
         dbPet.setName(pet.getName());
         dbPet.setTutor(pet.getTutor());
         dbPet.setBreed(pet.getBreed());
@@ -51,6 +52,13 @@ public class PetServiceImpl implements PetService {
     @Override
     public List<Pet> getAll() {
         return this.repository.findAll();
+    }
+
+    @Override
+    public Pet delete(Long id) {
+        Pet deletePet = this.getbyId(id);
+        this.repository.delete(deletePet);
+        return deletePet;
     }
 
     private void createValidator(Pet pet) {
